@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>곰돌이 베이커리 | 갓 구운 행복을 전해드려요</title>
+
+    <!-- Google Fonts: Fredoka One, M PLUS Rounded 1c -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <style>
+        /* === 1. 기본 스타일 및 색상 변수 === */
+        :root {
+            --bg-cream: #FFFBF5;
+            --primary-brown: #8D5B4C;
+            --text-dark: #4B3832;
+            --accent-yellow: #FFC947;
+            --white-color: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 18px;
+            line-height: 1.8;
+            overflow-x: hidden; /* 가로 스크롤 방지 */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        /* 제목 폰트 */
+        h1, h2, h3 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary-brown);
+            letter-spacing: 1px;
+        }
+
+        h1 { font-size: 4rem; text-align: center; }
+        h2 { font-size: 2.8rem; text-align: center; margin-bottom: 3.5rem; }
+        h3 { font-size: 1.5rem; }
+        
+        .section-title-kr {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-weight: 800;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        /* === 2. 헤더 및 네비게이션 === */
+        header {
+            width: 100%;
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(255, 251, 245, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid #EFEBE9;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-brown);
+            text-decoration: none;
+        }
+        .logo i {
+            color: var(--accent-yellow);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--primary-brown);
+            color: var(--white-color);
+        }
+
+        /* === 3. 히어로 섹션 (메인 화면) === */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white-color);
+        }
+
+        .hero-content {
+            background-color: rgba(75, 56, 50, 0.7);
+            padding: 40px 60px;
+            border-radius: 20px;
+        }
+        
+        #hero h1 { color: var(--white-color); }
+
+        #hero p {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .scroll-down-icon {
+            position: absolute;
+            bottom: 40px;
+            font-size: 2rem;
+            color: var(--white-color);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* === 4. 가게 소개 섹션 === */
+        #about {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex-basis: 45%;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 10px 10px 0 var(--primary-brown);
+        }
+        .about-text {
+            flex-basis: 55%;
+        }
+        .about-text p {
+            margin: 1.5rem 0;
+        }
+
+        /* === 5. 시그니처 스토리 스타일 (추가) === */
+        #signature {
+             background-color: var(--white-color);
+        }
+        .signature-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .signature-text { flex-basis: 55%; }
+        .signature-image { flex-basis: 45%; }
+        .signature-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: -10px 10px 0 var(--accent-yellow);
+        }
+        .signature-text p {
+            margin: 1.5rem 0;
+        }
+
+        /* === 6. 메뉴 섹션 === */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .menu-item {
+            background-color: var(--bg-cream);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px dashed var(--primary-brown);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .menu-item:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 25px rgba(141, 91, 76, 0.1);
+        }
+        .menu-item i {
+            font-size: 3rem;
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+        }
+        .menu-item .price {
+            font-weight: 700;
+            color: var(--primary-brown);
+            margin-top: 0.5rem;
+        }
+        
+        /* === 7. 갤러리 스타일 (추가) === */
+        #gallery {
+            background-color: var(--white-color);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .gallery-item:last-child {
+            grid-column: 1 / span 3;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* === 8. 찾아오는 길 섹션 === */
+        .location-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        .location-map {
+            flex: 1;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 5px solid var(--white-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .location-info {
+            flex: 1;
+        }
+        .location-info p {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+        .location-info i {
+            font-size: 1.5rem;
+            color: var(--primary-brown);
+            width: 30px;
+        }
+
+        /* === 9. 푸터 === */
+        footer {
+            background-color: var(--primary-brown);
+            color: var(--bg-cream);
+            text-align: center;
+            padding: 40px 0;
+        }
+        .social-links a {
+            color: var(--bg-cream);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--accent-yellow);
+        }
+        footer p {
+            margin-top: 1rem;
+            font-size: 14px;
+        }
+
+        /* === 10. GSAP 애니메이션을 위한 초기 상태 === */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#hero" class="logo"><i class="fas fa-paw"></i> Gomdori</a>
+                <ul>
+                    <li><a href="#about">가게 소개</a></li>
+                    <li><a href="#menu">메뉴</a></li>
+                    <li><a href="#gallery">갤러리</a></li>
+                    <li><a href="#location">오시는 길</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 메인 화면 -->
+        <section id="hero">
+            <div class="hero-content">
+                <h1>곰돌이 베이커리</h1>
+                <p>매일 아침, 갓 구운 행복을 전해드려요.</p>
+            </div>
+            <div class="scroll-down-icon">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- 가게 소개 -->
+        <section id="about" class="container">
+            <div class="about-image fade-in-up">
+                <img src="카페내부.jpg" alt="아늑한 카페 내부">
+            </div>
+            <div class="about-text fade-in-up">
+                <h2 class="section-title-kr">골목길 작은 쉼터,<br>곰돌이 베이커리입니다!</h2>
+                <p>신선한 재료와 정성을 가득 담아 매일 아침 따뜻한 빵을 굽습니다. 향긋한 커피와 달콤한 디저트가 있는 이곳에서 잠시 쉬어가세요.</p>
+                <p>곰돌이 베이커리는 언제나 여러분을 위한 아늑한 공간이 되어드릴게요.</p>
+            </div>
+        </section>
+
+        <!-- 시그니처 스토리 (추가) -->
+        <section id="signature">
+            <div class="container signature-content">
+                <div class="signature-text fade-in-up">
+                    <h2 class="section-title-kr">곰돌이의 약속</h2>
+                    <h3>대표 메뉴: 꿀단지 카스테라</h3>
+                    <p>곰돌이 베이커리의 '꿀단지 카스테라'는 그냥 카스테라가 아니에요. 곰돌이가 직접 양봉한 100% 천연 아카시아 꿀과 매일 아침 농장에서 가져온 신선한 무항생제 계란만을 사용해 만들어요.</p>
+                    <p>정직한 재료로 만든 진짜 달콤함을 느껴보세요!</p>
+                </div>
+                <div class="signature-image fade-in-up">
+                    <img src="카스테라.jpg" alt="꿀단지 카스테라">
+                </div>
+            </div>
+        </section>
+        
+        <!-- 메뉴 (보강) -->
+        <section id="menu">
+            <div class="container">
+                <h2 class="section-title-kr fade-in-up">곰돌이 베이커리 메뉴</h2>
+                
+                <h3 class="section-title-kr fade-in-up" style="text-align:center; margin-bottom: 2rem; font-size: 1.8rem;">☕ 커피 & 음료</h3>
+                <div class="menu-grid">
+                    <div class="menu-item fade-in-up"><i class="fas fa-mug-hot"></i><h3>곰돌이 라떼</h3><p class="price">5,500원</p></div>
+                    <div class="menu-item fade-in-up"><i class="fas fa-leaf"></i><h3>숲속의 아메리카노</h3><p class="price">4,500원</p></div>
+                    <div class="menu-item fade-in-up"><i class="fas fa-lemon"></i><h3>상큼 유자 에이드</h3><p class="price">6,000원</p></div>
+                </div>
+
+                <h3 class="section-title-kr fade-in-up" style="text-align:center; margin-top: 5rem; margin-bottom: 2rem; font-size: 1.8rem;">🥐 따끈따끈 베이커리</h3>
+                <div class="menu-grid">
+                    <div class="menu-item fade-in-up"><i class="fas fa-cookie-bite"></i><h3>초코곰 마들렌</h3><p class="price">3,000원</p></div>
+                    <div class="menu-item fade-in-up"><i class="fas fa-cheese"></i><h3>꿀단지 카스테라</h3><p class="price">6,000원</p></div>
+                    <div class="menu-item fade-in-up"><i class="fas fa-paw"></i><h3>곰발바닥 피낭시에</h3><p class="price">3,500원</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 갤러리 (추가) -->
+        <section id="gallery">
+            <div class="container">
+                <h2 class="section-title-kr fade-in-up">곰돌이 갤러리</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-up"><img src="곰 마들렌.jpg" alt="초코 케이크"></div>
+                    <div class="gallery-item fade-in-up"><img src="곰발바닥 휘낭시에.jpg" alt="음료 사진"></div>
+                    <div class="gallery-item fade-in-up"><img src="카스테라.jpg" alt="빵 사진"></div>
+                    <div class="gallery-item fade-in-up"><img src="카페내부.jpg" alt="카페 인테리어"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 찾아오는 길 -->
+        <section id="location" class="container">
+            <h2 class="section-title-kr fade-in-up">찾아오시는 길</h2>
+            <div class="location-content">
+                <div class="location-map fade-in-up">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.295201479216!2d126.9213193156294!3d37.57143993132717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98910e7b2331%3A0x6b87ca2a507a2789!2z7JWI7JeQ66as7JWU7J2466eI7JuQ!5e0!3m2!1sko!2skr!4v1672818048123!5m2!1sko!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="location-info fade-in-up">
+                    <p><i class="fas fa-map-marker-alt"></i><span>서울 마포구 행복동 123-45 곰돌이 빌딩 1층</span></p>
+                    <p><i class="fas fa-subway"></i><span>행복역 2번 출구에서 걸어서 5분 거리</span></p>
+                    <p><i class="fas fa-clock"></i><span>매일 오전 10:00 ~ 오후 9:00</span></p>
+                    <p><i class="fas fa-phone"></i><span>02-123-4567</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Blog"><i class="fas fa-blog"></i></a>
+        </div>
+        <p>&copy; 2025 Gomdori Bakery. All Rights Reserved.</p>
+    </footer>
+
+    <!-- GSAP & ScrollMagic 라이브러리 로드 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const controller = new ScrollMagic.Controller();
+
+            // 모든 .fade-in-up 요소에 대해 스크롤 애니메이션 적용
+            document.querySelectorAll('.fade-in-up').forEach(elem => {
+                const tween = gsap.fromTo(elem, 
+                    { opacity: 0, y: 50 }, 
+                    { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out' }
+                );
+
+                new ScrollMagic.Scene({
+                    triggerElement: elem,
+                    triggerHook: 0.9, // 뷰포트의 90% 지점에서 시작
+                    reverse: false
+                })
+                .setTween(tween)
+                .addTo(controller);
+            });
+        });
+    </script>
+</body>
+</html>

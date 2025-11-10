@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고영인 | Visual Designer & Frontend Developer</title>
+    <!-- 폰트: 제목용 Press Start 2P, 본문용 VT323 -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        /* === 눈이 편안하고 전문적인 색상 팔레트 === */
+        :root {
+            --bg-color: #1a1c2c; /* 딥 인디고 */
+            --ui-color: #2e3047; /* 슬레이트 그레이 */
+            --text-color: #f0f0f0; /* 가독성을 위해 밝기 상향 */
+            --primary-accent: #4a90e2; /* 소프트 블루 */
+            --secondary-accent: #f5a623; /* 골든 옐로우 */
+            --highlight-accent: #e94b3c; /* 소프트 레드 */
+            --border-width: 3px;
+        }
+
+        /* === 가독성 향상을 위한 기본 스타일 === */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'VT323', monospace;
+            margin: 0; padding: 0;
+            font-size: 20px;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            scroll-behavior: smooth;
+        }
+        .container { max-width: 1024px; margin: auto; overflow: hidden; padding: 0 25px; }
+        
+        /* 제목용 폰트 적용 */
+        h1, h2, h3, h4, .cta-button, .tag, .portfolio-links a, nav a {
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 0; /* 제목 폰트는 기본 간격 사용 */
+        }
+        h1, h2, h3, h4 { color: var(--primary-accent); text-shadow: 2px 2px 0px var(--secondary-accent); }
+        h2 { font-size: 2rem; text-align: center; margin-bottom: 5rem; }
+        section { padding: 7rem 0; }
+        
+        /* === 스크롤 애니메이션 === */
+        .anim-fade-up { opacity: 0; transform: translateY(50px); }
+
+        /* === 헤더 & 네비게이션 === */
+        header {
+            background: rgba(46, 48, 71, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: var(--border-width) solid var(--secondary-accent);
+            padding: 0.8rem 0; text-align: center; position: fixed;
+            width: 100%; top: 0; z-index: 100;
+        }
+        nav a { font-size: 16px; color: var(--text-color); text-decoration: none; margin: 0 15px; transition: all 0.3s; }
+        nav a:hover { color: var(--secondary-accent); text-shadow: 0 0 8px var(--secondary-accent); }
+        main { padding-top: 80px; }
+
+        /* === 히어로 섹션 === */
+        #hero {
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; min-height: 90vh; text-align: center;
+        }
+        #hero h1 { font-size: 2.8rem; line-height: 1.4; }
+        #hero p { font-size: 22px; margin: 1.5rem 0 2.5rem 0; }
+        .cta-button {
+            background-color: var(--secondary-accent); color: var(--bg-color);
+            padding: 14px 32px; text-decoration: none; border: var(--border-width) solid var(--text-color);
+            font-size: 16px; box-shadow: 6px 6px 0px var(--primary-accent);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-button:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0px var(--primary-accent); }
+
+        /* === 기술 (Skills) === */
+        .skills-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 3.5rem; 
+        }
+        .skill-category h3 { 
+            border-bottom: var(--border-width) solid var(--secondary-accent); 
+            padding-bottom: 0.8rem; 
+            margin-bottom: 2rem; 
+            font-size: 1.1rem; 
+        }
+        .skill-list {
+            display: grid;
+            grid-template-columns: max-content 1fr; 
+            gap: 1.2rem 1.5rem;
+            align-items: center;
+        }
+        .skill-list span { font-size: 18px; white-space: nowrap; }
+        .progress-bar-container { 
+            width: 100%; height: 22px; 
+            background-color: var(--bg-color); border: 2px solid var(--text-color); 
+        }
+        .progress-bar { 
+            width: 0; height: 100%; 
+            background: linear-gradient(90deg, var(--highlight-accent), var(--secondary-accent)); 
+        }
+        
+        /* === 커리어 여정 (Experience) === */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline-item { margin-bottom: 3rem; opacity: 0; }
+        .timeline-content { padding: 2.5rem; background-color: var(--ui-color); border: var(--border-width) solid var(--primary-accent); }
+        .timeline-content h3 { color: var(--secondary-accent); text-shadow: none; margin-bottom: 0.5rem; }
+        .timeline-content small { 
+            font-family: 'VT323', monospace; font-size: 18px; 
+            color: var(--secondary-accent); display: block; margin-bottom: 1.5rem;
+        }
+
+        /* === 포트폴리오 (Portfolio) === */
+        .portfolio-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+        .portfolio-item {
+            background: var(--ui-color); border: var(--border-width) solid var(--primary-accent);
+            padding: 2.5rem; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .portfolio-layout {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem; align-items: center;
+        }
+        .portfolio-item img { width: 100%; height: auto; border: 2px solid var(--text-color); object-fit: cover; aspect-ratio: 4 / 3; }
+        .portfolio-item h3 { margin-top: 0; margin-bottom: 1.5rem; color: var(--secondary-accent); text-shadow: none; }
+        .portfolio-item h4 { font-size: 1rem; color: var(--secondary-accent); text-shadow: none; margin-bottom: 1rem; margin-top: 2rem; }
+        .portfolio-tags { margin-bottom: 2rem; }
+        .tag { background: var(--primary-accent); padding: 6px 12px; font-size: 12px; display: inline-block; margin: 4px 2px; line-height: 1.5; }
+        .portfolio-links a {
+            background-color: var(--secondary-accent); color: var(--bg-color);
+            padding: 10px 20px; text-decoration: none; border: var(--border-width) solid var(--text-color);
+            font-size: 14px; margin-right: 10px;
+            transition: transform 0.2s, box-shadow 0.2s; display: inline-block;
+        }
+        .portfolio-links a:hover { transform: translate(2px, 2px); }
+
+        /* === 기타 모든 섹션 스타일 === */
+        #about .container { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+        .avatar { width: 280px; height: 280px; border: var(--border-width) solid var(--text-color); object-fit: cover; }
+        .about-text { flex: 2; min-width: 320px; }
+        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+        .philosophy-card { background: var(--ui-color); padding: 2.5rem 2rem; border-left: 5px solid var(--primary-accent); }
+        .philosophy-card h3 { font-size: 1.2rem; color: var(--secondary-accent); text-shadow: none; margin-top: 0; }
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; align-items: stretch; }
+        .process-card { background: var(--ui-color); border: var(--border-width) solid transparent; padding: 2.5rem 2rem; transition: all 0.3s ease; display: flex; flex-direction: column; text-align: left; }
+        .process-card:hover { transform: translateY(-10px); border-color: var(--primary-accent); }
+        .process-card i { font-size: 3rem; color: var(--secondary-accent); margin-bottom: 1.5rem; text-align: center; }
+        .process-card h3 { font-size: 1.1rem; text-align: center; }
+        .process-card p { flex-grow: 1; margin-top: 1.5rem; }
+        #contact-form { max-width: 650px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+        #contact-form input, #contact-form textarea, #contact-form button { font-family: 'VT323', monospace; font-size: 20px; padding: 1rem; border: var(--border-width) solid var(--primary-accent); background: var(--bg-color); color: var(--text-color); }
+        #contact-form button { font-family: 'Press Start 2P', cursive; font-size: 16px; background: var(--secondary-accent); color: var(--bg-color); cursor: pointer; }
+        footer { background-color: var(--ui-color); text-align: center; padding: 3rem 0; border-top: var(--border-width) solid var(--primary-accent); }
+        .social-links a { color: var(--text-color); font-size: 1.8rem; margin: 0 1rem; transition: color 0.3s; }
+        .social-links a:hover { color: var(--secondary-accent); }
+        footer p { font-size: 16px; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <header><nav><a href="#about">About</a><a href="#philosophy">Philosophy</a><a href="#skills">Skills</a><a href="#experience">Journey</a><a href="#portfolio">Works</a><a href="#my-quest">Quest</a><a href="#contact">Contact</a></nav></header>
+
+    <main>
+        <section id="hero">
+            <h1 class="hero-el">고영인</h1>
+            <p class="hero-el">디자인으로 문제를 해결하고, 코드로 아이디어를 구현하는<br>시각디자인 전공 프론트엔드 개발자를 목표로 성장하고 있습니다.</p>
+            <a href="#portfolio" class="cta-button hero-el">PORTFOLIO</a>
+        </section>
+
+        <section id="about" class="anim-fade-up">
+             <div class="container">
+                <img src="KakaoTalk_20251105_205709049.jpg" alt="고영인 아바타" class="avatar">
+                <div class="about-text">
+                    <h2>ABOUT ME</h2>
+                    <p>시각디자인을 공부하며 '왜?'라는 질문을 통해 문제의 본질을 파고드는 법을 배웠습니다. 아이디어를 시각화하는 것을 넘어, 직접 사용자와 상호작용하는 살아있는 결과물로 만들고 싶다는 열망이 저를 개발의 세계로 이끌었습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy">
+            <h2 class="anim-fade-up">DESIGN PHILOSOPHY</h2>
+            <div class="container philosophy-grid">
+                <div class="philosophy-card anim-fade-up"><h3>사용자 중심 설계</h3><p>모든 결정의 중심에는 항상 사용자가 있습니다. 데이터와 공감을 바탕으로 사용자의 진짜 문제를 해결하는 직관적인 경험을 설계합니다.</p></div>
+                <div class="philosophy-card anim-fade-up"><h3>명확한 소통</h3><p>디자인과 코드, 아이디어와 구현 사이의 간극을 줄이는 명확한 커뮤니케이션은 성공적인 프로젝트의 핵심이라고 믿습니다.</p></div>
+                <div class="philosophy-card anim-fade-up"><h3>지속 가능한 코드</h3><p>단순히 동작하는 코드를 넘어, 동료가 이해하기 쉽고 미래의 변화에 유연하게 대처할 수 있는 깨끗하고 지속 가능한 코드를 추구합니다.</p></div>
+            </div>
+        </section>
+
+        <section id="my-process">
+            <h2 class="anim-fade-up">MY WORK PROCESS</h2>
+            <div class="container process-grid">
+                <div class="process-card anim-fade-up"><i class="fa-solid fa-compass-drafting"></i><h3>1. 발견 및 정의</h3><p>문제의 본질을 파고드는 것을 시작으로 사용자와 비즈니스 목표를 분석하여 프로젝트의 방향을 설정합니다.</p></div>
+                <div class="process-card anim-fade-up"><i class="fa-solid fa-palette"></i><h3>2. 디자인 및 설계</h3><p>와이어프레임과 프로토타입으로 최적의 UX를 설계하고 매력적인 비주얼 디자인을 구현합니다.</p></div>
+                <div class="process-card anim-fade-up"><i class="fa-solid fa-code"></i><h3>3. 개발 및 구현</h3><p>디자인을 바탕으로 시맨틱 마크업과 재사용 가능한 컴포넌트를 작성하여 웹에 생명을 불어넣습니다.</p></div>
+                <div class="process-card anim-fade-up"><i class="fa-solid fa-rocket"></i><h3>4. 테스트 및 개선</h3><p>다양한 환경에서 테스트를 거쳐 완성도를 높이고 사용자 피드백을 반영하여 지속적으로 개선합니다.</p></div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="anim-fade-up">SKILLSET</h2>
+            <div class="container skills-grid">
+                <div class="skill-category anim-fade-up">
+                    <h3>Design & Prototyping</h3>
+                    <div class="skill-list">
+                        <span>Figma & FigJam</span><div class="progress-bar-container"><div class="progress-bar" data-progress="95%"></div></div>
+                        <span>Photoshop</span><div class="progress-bar-container"><div class="progress-bar" data-progress="90%"></div></div>
+                        <span>Illustrator</span><div class="progress-bar-container"><div class="progress-bar" data-progress="88%"></div></div>
+                        <span>InDesign</span><div class="progress-bar-container"><div class="progress-bar" data-progress="80%"></div></div>
+                    </div>
+                </div>
+                <div class="skill-category anim-fade-up">
+                    <h3>Development</h3>
+                     <div class="skill-list">
+                        <span>HTML & CSS</span><div class="progress-bar-container"><div class="progress-bar" data-progress="95%"></div></div>
+                        <span>JavaScript</span><div class="progress-bar-container"><div class="progress-bar" data-progress="85%"></div></div>
+                        <span>React</span><div class="progress-bar-container"><div class="progress-bar" data-progress="80%"></div></div>
+                    </div>
+                </div>
+                 <div class="skill-category anim-fade-up">
+                    <h3>Motion & Video</h3>
+                     <div class="skill-list">
+                        <span>After Effects</span><div class="progress-bar-container"><div class="progress-bar" data-progress="75%"></div></div>
+                        <span>Premiere Pro</span><div class="progress-bar-container"><div class="progress-bar" data-progress="85%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="anim-fade-up">디자인과 코드의 여정</h2>
+            <div class="container timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>졸업 프로젝트와 역량의 통합</h3>
+                        <small>2025 (졸업 예정)</small>
+                        <p>1년간 배운 디자인 및 개발 지식을 총동원하여 졸업 프로젝트로 인터랙티브 웹을 제작하고 있습니다. 기획, UI/UX 설계부터 개발까지 모든 과정을 주도적으로 진행하며 실무 역량을 강화하고 있습니다.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>시각디자인 기초 및 웹 개발 입문</h3>
+                        <small>2024</small>
+                        <p>시각디자인과에 입학하여 디자인의 기초 원리와 타이포그래피, 색채학 등을 배웠습니다. 웹 퍼블리싱 수업에서 HTML과 CSS를 처음 접하며, 정적인 디자인에 생명을 불어넣는 코딩의 매력에 빠져들었습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="portfolio">
+            <h2 class="anim-fade-up">PROJECTS</h2>
+            <div class="container portfolio-grid">
+                
+                <div class="portfolio-item anim-fade-up">
+                    <div class="portfolio-layout">
+                        <img src="곰돌이베이커리.jpg" alt="곰돌이 베이커리 웹사이트 스크린샷">
+                        <div class="portfolio-desc">
+                            <h3>인터랙티브 웹 포트폴리오 (카페)</h3>
+                            <p>GSAP와 ScrollMagic을 활용하여 스크롤 애니메이션을 구현한 가상의 베이커리 소개 페이지입니다. 디자인부터 개발까지 100% 직접 구현했습니다.</p>
+                            <h4>주요 기술</h4>
+                            <div class="portfolio-tags"><span class="tag">GSAP</span><span class="tag">ScrollMagic</span><span class="tag">JavaScript</span></div>
+                            <div class="portfolio-links"><a href="bakery.html" target="_blank">Live Demo</a></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item anim-fade-up">
+                    <div class="portfolio-layout">
+                        <img src="stellar-screenshot.jpg.png" alt="Stellar 플랫폼 웹사이트">
+                         <div class="portfolio-desc">
+                            <h3>컴포넌트 기반 배포 플랫폼 'Stellar'</h3>
+                            <p>React, TypeScript, Storybook 기술 스택을 활용하여 가상의 웹 배포 플랫폼을 제작했습니다. 재사용 가능한 컴포넌트 설계와 인터랙션을 중점적으로 구현했습니다.</p>
+                            <h4>주요 기술</h4>
+                            <div class="portfolio-tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Storybook</span></div>
+                            <div class="portfolio-links"><a href="stellar-final.html" target="_blank">Live Demo</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="portfolio-item anim-fade-up">
+                     <div class="portfolio-layout">
+                        <img src="threads-screenshot.png" alt="Threads 컨셉 랜딩 페이지">
+                        <div class="portfolio-desc">
+                            <h3>Threads 컨셉 브랜딩 & 인터랙티브 웹 디자인</h3>
+                            <p>Figma를 통해 체계적인 디자인 시스템을 먼저 구축하고, 이를 바탕으로 실제 웹 기술로 구현하여 브랜드 아이덴티티를 재해석하고 사용자 경험을 극대화했습니다.</p>
+                            <h4>주요 기술</h4>
+                            <div class="portfolio-tags"><span class="tag">Branding</span><span class="tag">UI/UX</span><span class="tag">Figma</span><span class="tag">Interaction</span></div>
+                            <div class="portfolio-links">
+                                <a href="threads.html" target="_blank">Live Demo</a>
+                                <a href="#" target="_blank">Behance</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="my-quest">
+            <h2 class="anim-fade-up">MY NEXT QUEST</h2>
+            <div class="container philosophy-grid">
+                <div class="philosophy-card anim-fade-up"><h3>React 기반 심화 학습</h3><p>사용자에게 더 나은 인터랙션을 제공하기 위해 React의 심화 개념과 Next.js 같은 프레임워크를 학습하여 전문성을 키우고 싶습니다.</p></div>
+                <div class="philosophy-card anim-fade-up"><h3>팀 프로젝트 경험</h3><p>다양한 직무의 동료들과 협업하며 함께 성장하는 경험을 하고 싶습니다. 원활한 소통으로 시너지를 내는 팀의 일원이 되는 것이 목표입니다.</p></div>
+                <div class="philosophy-card anim-fade-up"><h3>실사용자 서비스 개발</h3><p>제가 디자인하고 개발한 서비스가 실제로 사용자들에게 가치를 제공하고, 긍정적인 피드백을 받는 경험을 통해 개발자로서 성장하고 싶습니다.</p></div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="anim-fade-up">CONTACT</h2>
+            <form id="contact-form" class="anim-fade-up">
+                <input type="text" name="name" placeholder="YOUR NAME" required>
+                <input type="email" name="email" placeholder="YOUR EMAIL" required>
+                <textarea name="message" rows="7" placeholder="MESSAGE" required></textarea>
+                <button type="submit">SEND MESSAGE</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" target="_blank" aria-label="Behance"><i class="fa-brands fa-behance-square"></i></a>
+        </div>
+        <p>&copy; 2025 고영인. All Rights Reserved.</p>
+    </footer>
+
+    <!-- GSAP & ScrollMagic 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const controller = new ScrollMagic.Controller();
+
+            gsap.from(".hero-el", { duration: 1, y: 50, opacity: 0, stagger: 0.25, ease: "power3.out" });
+
+            document.querySelectorAll('.anim-fade-up').forEach(elem => {
+                let tween = gsap.fromTo(elem, { y: 50, opacity: 0 }, { duration: 1, y: 0, opacity: 1, ease: 'power2.out' });
+                new ScrollMagic.Scene({ triggerElement: elem, triggerHook: 0.9, reverse: false }).setTween(tween).addTo(controller);
+            });
+
+            new ScrollMagic.Scene({ triggerElement: '#skills', triggerHook: 0.8, reverse: false })
+                .on('enter', () => {
+                    document.querySelectorAll('.progress-bar').forEach(bar => {
+                        gsap.to(bar, { duration: 1.5, width: bar.getAttribute('data-progress'), ease: 'power3.inOut' });
+                    });
+                }).addTo(controller);
+
+            gsap.utils.toArray('.timeline-item').forEach(item => {
+                let tween = gsap.fromTo(item, { y: 60, opacity: 0 }, { duration: 0.8, y: 0, opacity: 1, ease: 'power2.out' });
+                new ScrollMagic.Scene({ triggerElement: item, triggerHook: 0.9, reverse: false }).setTween(tween).addTo(controller);
+            });
+            
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('메시지가 성공적으로 전송되었습니다! (데모)');
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
